@@ -75,33 +75,18 @@ const galleryMarkup = images
   .map(
     ({ preview, original, description }) => `
     <li class="gallery-item">
-	<a class="gallery-link" href=${original}>
-		<img 
-		  class="gallery-image" 
-		  src=${preview} 
-		  alt=${description} 
-		/>
-	</a>
-</li>
-
-`
+      <a class="gallery-link" href="${original}">
+        <img 
+          class="gallery-image" 
+          src="${preview}" 
+          alt="${description}" 
+        />
+      </a>
+    </li>
+  `
   )
   .join('');
 
 gallery.innerHTML = galleryMarkup;
-
-gallery.addEventListener('click', event => {
-  event.preventDefault();
-
-  const target = event.target;
-  if (target.nodeName !== 'IMG') return;
-
-  const largeImageURL = target.dataset.source;
-  const instance = basicLightbox.create(`
-        <img src="${largeImageURL}" width="1112" height="640">
-    `);
-
-  instance.show();
-});
 
 new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
